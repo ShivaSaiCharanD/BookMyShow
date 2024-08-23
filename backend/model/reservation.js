@@ -17,7 +17,6 @@ const ReservationSchema = new mongoose.Schema({
     OrderID:{
         type:String,
         required:true,
-        ref : 'User'
     },
     TicketPrice:{
         type:Number,
@@ -32,11 +31,10 @@ const ReservationSchema = new mongoose.Schema({
         type:mongoose.Schema.Types.ObjectId,
         ref: 'Movie',
         required:true,
-        ref:'Movie'
+        
     },
     TheatreID:{
         type:mongoose.Schema.Types.ObjectId,
-        ref: 'Theatre',
         required:true,
         ref:'Theatre'
     },
