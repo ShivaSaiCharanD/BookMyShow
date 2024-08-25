@@ -1,4 +1,4 @@
-import '../App.css';
+import '../Css/Theatre.css';
 import React, { useState } from 'react';
 import clsx from 'clsx';
 
@@ -64,31 +64,34 @@ export default function Theatre() {
   const [selectedSeats, setSelectedSeats] = useState([]);
 
   return (
-    <div className="App">
-        <h1>Book your movie tickets for Saripodhaa Sanivaaram</h1>
-      <Movies
-        movie={selectedMovie}
-        onChange={(movie) => {
-          setSelectedSeats([]);
-          setSelectedMovie(movie);
-        }}
-      />
-      <ShowCase />
-      <Cinema
-        movie={selectedMovie}
-        selectedSeats={selectedSeats}
-        onSelectedSeatsChange={(selectedSeats) =>
-          setSelectedSeats(selectedSeats)
-        }
-      />
+    <div className="Theatre">
 
-      <p className="info">
-        You have selected <span className="count">{selectedSeats.length}</span>{' '}
-        seats for the price of{' '}
-        <span className="total">
-          {selectedSeats.length * selectedMovie.price}$
-        </span>
-      </p>
+      <div className="App">
+        <h1>Book your movie tickets for Saripodhaa Sanivaaram</h1>
+        <Movies
+          movie={selectedMovie}
+          onChange={(movie) => {
+            setSelectedSeats([]);
+            setSelectedMovie(movie);
+          }}
+        />
+        <ShowCase />
+        <Cinema
+          movie={selectedMovie}
+          selectedSeats={selectedSeats}
+          onSelectedSeatsChange={(selectedSeats) =>
+            setSelectedSeats(selectedSeats)
+          }
+        />
+
+        <p className="info">
+          You have selected <span className="count">{selectedSeats.length}</span>{' '}
+          seats for the price of{' '}
+          <span className="total">
+            {selectedSeats.length * selectedMovie.price}$
+          </span>
+        </p>
+      </div>
     </div>
   );
 }
@@ -100,6 +103,7 @@ function Movies({ movie, onChange }) {
       <select
         id="movie"
         value={movie.name}
+        style={{ color: 'black' }} 
         onChange={(e) => {
           onChange(movies.find((movie) => movie.name === e.target.value));
         }}
@@ -169,10 +173,10 @@ function Cinema({ movie, selectedSeats, onSelectedSeatsChange }) {
                     isOccupied
                       ? null
                       : (e) => {
-                          if (e.key === 'Enter') {
-                            handleSelectedState(seat);
-                          }
+                        if (e.key === 'Enter') {
+                          handleSelectedState(seat);
                         }
+                      }
                   }
                 >
                   {seat}
