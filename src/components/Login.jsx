@@ -56,7 +56,7 @@ export default function Login() {
           Login
         </Button>
         <Typography color="gray" className="mt-4 text-center font-normal">
-          Don't have an Account?{" "}
+            Dont have an Account?{" "}
           <Link to="/signup" className="font-medium text-gray-50">
             Sign Up
           </Link>
