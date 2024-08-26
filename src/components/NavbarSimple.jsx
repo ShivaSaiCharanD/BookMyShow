@@ -6,10 +6,11 @@ import {
   IconButton,
   Button
 } from "@material-tailwind/react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
-
-function NavList() {
+import { useState , useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+function NavList({ isLoggedIn, handleLogout }) {
   return (
     <ul className="my-2 flex flex-col gap-1 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-4">
       <Typography
@@ -22,32 +23,38 @@ function NavList() {
           Pages
         </a>
       </Typography>
-      <Link to="/login">
-        <Button color="amber" variant="gradient" size="sm">
-          Login
+      {!isLoggedIn ? (
+        <>
+          <Link to="/login">
+            <Button color="amber" variant="gradient" size="sm">
+              Login
+            </Button>
+          </Link>
+          <Link to="/signup">
+            <Button variant="outlined" size="sm">
+              SignUp
+            </Button>
+          </Link>
+        </>
+      ) : (
+        <Button color="red" variant="gradient" size="sm" onClick={handleLogout}>
+          Logout
         </Button>
-      </Link>
-      <Link to="/signup">
-        <Button
-          variant="outlined"
-          size="sm"
-        >
-          SignUp
-        </Button>
-      </Link>
+      )}
 
 
     </ul>
   );
 }
 
-export default function NavbarSimple() {
-  const [openNav, setOpenNav] = React.useState(false);
+export default function NavbarSimple({ isLoggedIn, onLogout }) {
+  const [openNav, setOpenNav] = useState(false);
+  const Navigate = useNavigate();
 
   const handleWindowResize = () =>
     window.innerWidth >= 960 && setOpenNav(false);
 
-  React.useEffect(() => {
+  useEffect(() => {
     window.addEventListener("resize", handleWindowResize);
 
     return () => {
@@ -55,18 +62,21 @@ export default function NavbarSimple() {
     };
   }, []);
 
+
   return (
-    <Navbar className="mx-auto max-w-screen-xl px-3 py-2 mt-1">
+   <div >
+     <Navbar className="mx-auto w-screen-xl px-3 py-2 mt-1">
       <div className="flex items-center justify-between text-blue-gray-900">
         <Typography
           as="a"
           variant="h6"
           className="mr-4 cursor-pointer py-1.5"
+          onClick={()=>Navigate('/')}
         >
           BMS
         </Typography>
         <div className="hidden lg:block">
-          <NavList />
+        <NavList isLoggedIn={isLoggedIn} handleLogout={onLogout} />
         </div>
         <IconButton
           variant="text"
@@ -82,8 +92,9 @@ export default function NavbarSimple() {
         </IconButton>
       </div>
       <Collapse open={openNav}>
-        <NavList />
+        <NavList isLoggedIn={isLoggedIn} handleLogout={onLogout} />
       </Collapse>
     </Navbar>
+   </div>
   );
 }

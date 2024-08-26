@@ -1,3 +1,16 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px #242424 inset !important;
+    box-shadow: 0 0 0px 1000px #242424 inset !important;
+    -webkit-text-fill-color: white !important;
+  }
+  
+  /* Optionally, apply the same style to the input's focus state */
+  input:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0px 1000px #1f1f1f inset !important;
+    box-shadow: 0 0 0px 1000px #2d2d2d inset !important;
+    -webkit-text-fill-color: white !important;
+  }
