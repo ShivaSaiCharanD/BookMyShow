@@ -4,11 +4,11 @@ import './App.css'
 import Home from './components/Home.jsx'
 import NavbarSimple from './components/NavbarSimple.jsx'
 import Theatre from './components/Theatre.jsx'
-import Login from './components/Login.jsx'
 import Signup from './components/Signup.jsx'
-// import { BrowserRouter as Router } from 'react-router-dom'
+import Login from './components/login.jsx'
 import UserDashBoard from './components/UserDashboard.jsx';
 import { Routes, Route } from 'react-router-dom'
+
 function App() {
 
 

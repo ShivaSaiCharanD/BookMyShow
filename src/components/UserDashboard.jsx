@@ -1,6 +1,6 @@
 import { Carousel, IconButton } from "@material-tailwind/react";
  
-export function CarouselCustomArrows() {
+export default function CarouselCustomArrows() {
   return (
     <Carousel
       className="rounded-xl"
