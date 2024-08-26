@@ -6,7 +6,7 @@ import {
   IconButton,
   Button
 } from "@material-tailwind/react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { useState , useEffect } from "react";
 import { useNavigate } from "react-router-dom";
@@ -49,6 +49,7 @@ function NavList({ isLoggedIn, handleLogout }) {
 
 export default function NavbarSimple({ isLoggedIn, onLogout }) {
   const [openNav, setOpenNav] = useState(false);
+  const Navigate = useNavigate();
 
   const handleWindowResize = () =>
     window.innerWidth >= 960 && setOpenNav(false);
@@ -63,12 +64,14 @@ export default function NavbarSimple({ isLoggedIn, onLogout }) {
 
 
   return (
-    <Navbar className="mx-auto max-w-screen-xl px-3 py-2 mt-1">
+   <div >
+     <Navbar className="mx-auto w-screen-xl px-3 py-2 mt-1">
       <div className="flex items-center justify-between text-blue-gray-900">
         <Typography
           as="a"
           variant="h6"
           className="mr-4 cursor-pointer py-1.5"
+          onClick={()=>Navigate('/')}
         >
           BMS
         </Typography>
@@ -92,5 +95,6 @@ export default function NavbarSimple({ isLoggedIn, onLogout }) {
         <NavList isLoggedIn={isLoggedIn} handleLogout={onLogout} />
       </Collapse>
     </Navbar>
+   </div>
   );
 }
