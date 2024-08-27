@@ -2,7 +2,7 @@ import Carousel from './Carousel';
 
 function UserDashboard() {
   return (
-    <div className="App">
+    <div className="max-w-2xl ">
       <Carousel />
     </div>
   );
