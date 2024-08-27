@@ -2,6 +2,7 @@ import React from 'react'
 
 import { Carousel, Typography, Button } from "@material-tailwind/react";
 import {Link } from 'react-router-dom';
+import Loader from './Loader';
 
 export default function Home() {
   return (
@@ -44,7 +45,7 @@ export default function Home() {
           </div>
         </div>
       </Carousel>
-
+      {/* <Loader message={"please wait.."}/> */}
     </div>
   )
 }

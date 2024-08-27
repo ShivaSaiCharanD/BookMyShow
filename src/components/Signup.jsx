@@ -9,7 +9,7 @@ import {
   Option
 } from "@material-tailwind/react";
 import { Link, useNavigate } from "react-router-dom";
-import { toast } from 'react-toastify';
+import { toast , ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useState } from "react";
 import axios from "axios";
@@ -61,15 +61,18 @@ export default function Signup() {
 
     try {
       const response = await axios.post("http://localhost:4000/user/register", formData);
-      if (response.status === 409) {
-        toast.error("User already exists.");
-      } else
+   
       if (response.status === 200) {
-        toast.success("Signup successful! Redirecting to login...");
+        toast.success("Signup successful!" , {position: 'bottom-right' , autoClose: 1500});
         navigate("/login");
       }
     } catch (error) {
-      toast.error("Signup failed. Please try again later.");
+      if (error.response.status === 409) {
+        toast.error("User already exists." , {position: 'bottom-right' , autoClose: 1500});
+      } 
+      else{
+      toast.error("Signup failed. Please try again later." , {position: 'bottom-right' , autoClose: 1500});
+      }
       console.error(error);
     }
   };
@@ -77,6 +80,7 @@ export default function Signup() {
   return (
     <>
       <div className="flex justify-center mt-20 mb-10">
+        <ToastContainer />
         <Card color="transparent" shadow={true} className="border p-4 shadow-yellow-700 shadow-md">
           <Typography variant="h4" color="white" className="text-center mb-4">
             Sign Up

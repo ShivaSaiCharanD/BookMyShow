@@ -10,6 +10,7 @@ import UserDashBoard from './components/UserDashboard.jsx';
 import { Routes, Route , useNavigate} from 'react-router-dom'
 import { useState, useEffect } from 'react'
 
+
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
@@ -40,7 +41,8 @@ function App() {
         <Route path='/dashboard' element={<UserDashBoard />} />
       </Routes>
       {/* <Theatre /> */}
-      {/* <Home /> */}
+
+
     </>
   )
 }
