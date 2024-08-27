@@ -1,4 +1,4 @@
-import React from 'react'
+// import React from 'react'
 import '../Css/Loader.css'
 
 export default function Loader({message}) {
