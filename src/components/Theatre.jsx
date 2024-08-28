@@ -1,5 +1,5 @@
 import '../Css/Theatre.css';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import clsx from 'clsx';
 
 const theatre = {
@@ -99,7 +99,7 @@ export default function Theatre() {
 function Movies({ movie, onChange }) {
   return (
     <div className="Movies">
-      <label For="movie">Pick ShowTime</label>
+      <label htmlFor="movie">Pick ShowTime</label>
       <select
         id="movie"
         value={movie.name}
