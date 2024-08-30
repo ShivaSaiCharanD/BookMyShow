@@ -1,8 +1,38 @@
 import { useState, useEffect } from 'react';
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline'; // Ensure you have heroicons installed
-import { Typography } from '@material-tailwind/react';
+import {
+  Card,
+  CardHeader,
+  CardBody,
+  CardFooter,
+  Typography,
+  Button,
+} from "@material-tailwind/react";
+import axios from 'axios';
+
+
+
 const Carousel = () => {
+  const [movies, setMovies] = useState([]);
   const [activeIndex, setActiveIndex] = useState(0);
+  const getMovies = async () => {
+    try {
+      const response = await axios.get('http://localhost:4000/admin/getmovies'
+        ,
+        {
+          headers: {
+            ' Authorization': `${localStorage.getItem('token')}`,
+          },
+        }
+      );
+      setMovies(response.data.movies);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  useEffect(() => {
+    getMovies();
+  }, []);
 
   const slides = [
     {
@@ -18,7 +48,7 @@ const Carousel = () => {
     {
       image: "https://imgs.search.brave.com/GA5YNK0FaYzRtSNeit3BNIrJvIvc1e7DmhH-zHS2A28/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/dGVsdWd1MzYwLmNv/bS93cC1jb250ZW50/L3VwbG9hZHMvMjAy/NC8wMS9EZXZhcmEu/anBn",
       caption: "Zoovara break even in 2024",
-      credit: "Photo: Steve Carter" 
+      credit: "Photo: Steve Carter"
     },
     {
       image: "https://imgs.search.brave.com/0u_fZPp7gXVacWFcxT8fNwLYl_blRzELR98tcImFVkI/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9zLnlp/bWcuY29tL255L2Fw/aS9yZXMvMS4yLzVV/ZGZnZGpBMkpaTVJE/RnZzbkpfWGctLS9Z/WEJ3YVdROWFHbG5h/R3hoYm1SbGNqdDNQ/VEV5TkRJN2FEMDJP/VGstL2h0dHBzOi8v/bWVkaWEuemVuZnMu/Y29tL2VuL2NvbWlu/Z3Nvb25fbmV0XzQ3/Ny81Yzc3ZDdkZWJk/MTAxYWJiMGU4Mzdl/MDgzOWQzY2M3Mw",
@@ -45,21 +75,23 @@ const Carousel = () => {
   }, [slides.length]);
 
   return (
-    <section className="relative bg-gray-900 py-6 mt-2 lg:w-11/12 border rounded-lg overflow-hidden border-amber-100 shadow-2xl shadow-amber-200">
-      
-        <Typography variant="h3" color="white" className="text-center">
-          Recently released movies
-        </Typography>
-     
-      <div className="container mx-auto px-5">
-        <div className="relative">
-          <div className="flex transition-transform duration-500 ease-in-out" style={{ transform: `translateX(-${activeIndex * 100}%)` }}>
+    <div className="flex flex-col items-center justify-center w-screen  bg-gray-900 py-6">
+      <Typography variant="h3" color="white" className="text-center mb-4">
+        Recently released movies
+      </Typography>
+      <section className="relative w-full  bg-gray-900  rounded-lg shadow-2xl  overflow-hidden">
+
+        <div className="relative border-amber-100 shadow-amber-200 max-w-5xl">
+          <div
+            className="flex transition-transform duration-500 ease-in-out"
+            style={{ transform: `translateX(-${activeIndex * 100}%)` }}
+          >
             {slides.map((slide, index) => (
-              <div key={index} className="w-full flex-shrink-0 relative">
+              <div key={index} className="flex-shrink-0 w-full">
                 <img
                   src={slide.image}
                   alt={`Slide ${index + 1}`}
-                  className="w-full  object-cover rounded-lg gap-2"
+                  className="w-full h-auto object-cover rounded-lg"
                 />
                 <div className="absolute bottom-0 left-0 p-5 bg-black bg-opacity-50 text-white w-full">
                   <p className="font-bold">{slide.caption}</p>
@@ -72,15 +104,15 @@ const Carousel = () => {
           {/* Navigation Arrows */}
           <button
             onClick={() => setActiveIndex((prevIndex) => (prevIndex === 0 ? slides.length - 1 : prevIndex - 1))}
-            className="absolute top-1/2 left-2 transform -translate-y-1/2 bg-white p-2 rounded-full lg:hidden"
+            className="absolute top-1/2 left-4 transform -translate-y-1/2 bg-white p-2 rounded-full"
           >
-            <ChevronLeftIcon className="w-6 h-6 text-gray-900 lg:hidden" />
+            <ChevronLeftIcon className="w-6 h-6 text-gray-900" />
           </button>
           <button
             onClick={() => setActiveIndex((prevIndex) => (prevIndex + 1) % slides.length)}
-            className="absolute top-1/2 right-2 transform -translate-y-1/2 bg-white p-2 rounded-full lg:hidden"
+            className="absolute top-1/2 right-4 transform -translate-y-1/2 bg-white p-2 rounded-full"
           >
-            <ChevronRightIcon className="w-6 h-6 text-gray-900 lg:hidden" />
+            <ChevronRightIcon className="w-6 h-6 text-gray-900" />
           </button>
         </div>
 
@@ -100,8 +132,34 @@ const Carousel = () => {
             </button>
           ))}
         </div>
-      </div>
-    </section>
+      </section>
+      <div className='flex gap-2 flex-wrap'>
+          {
+            movies.map((movie) => (
+              <Card className="mt-6 w-80" key={movie.id}>
+                <CardHeader color="blue-gray" className="relative w-9/12 mt-1">
+                  <img
+                    src={movie.image}
+                    alt="card-image"
+                    className="object-cover"
+                  />
+                </CardHeader>
+                <CardBody>
+                  <Typography variant="h5" color="blue-gray" className="mb-2">
+                    {movie.title}
+                  </Typography>
+                  <Typography>
+                    {movie.description}
+                  </Typography>
+                </CardBody>
+                <CardFooter className="pt-0">
+                  <Button color='amber' variant='gradient'>Book Now</Button>
+                </CardFooter>
+              </Card>
+            ))
+         }
+        </div>
+    </div>
   );
 };
 
