@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline'; // Ensure you have heroicons installed
 import {
   Card,
@@ -15,7 +15,7 @@ const Carousel = () => {
   const [movies, setMovies] = useState([]);
   const [slides, setSlides] = useState([]);
   const [activeIndex, setActiveIndex] = useState(0);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const getMovies = async () => {
     try {
