@@ -42,10 +42,10 @@ function App() {
         <Route path='/signup' element={<Signup />} />
         <Route path='/dashboard' element={<UserDashboard />} >
           <Route path='movie' element={<Movie />} >
-          <Route path='theatre' element={<Theatre />} />
+            <Route path='theatre' element={<Theatre />} />
           </Route>
-
         </Route>
+        {/* <Route path='/the' element={<Theatre/>} />   */}
       </Routes>
       {/* <Theatre /> */}
     </>
