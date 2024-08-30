@@ -10,8 +10,11 @@ import {
   Button,
 } from "@material-tailwind/react";
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const Carousel = () => {
+  const navigate = useNavigate();
+
   const [movies, setMovies] = useState([]);
   const [slides, setSlides] = useState([]);
   const [activeIndex, setActiveIndex] = useState(0);
@@ -52,6 +55,11 @@ const Carousel = () => {
     setActiveIndex(index);
   };
 
+  function book(id){
+    console.log(id);
+    localStorage.setItem('movie', id);
+    navigate('movie');
+  }
   return (
     <div className="flex flex-col items-center justify-center w-screen bg-[#1b1b1b] py-6 px-4">
       <Typography variant="h3" color="white" className="text-center mb-4">
@@ -115,7 +123,7 @@ const Carousel = () => {
       {/* Movie Cards */}
       <div className='flex gap-2 flex-wrap mt-6'>
         {movies.map((movie) => (
-          <Card className="w-80" key={movie.id}>
+          <Card className="w-80" key={movie._id}>
             <CardHeader color="blue-gray" className="relative w-48 mt-1">
               <img
                 src={movie.image}
@@ -132,7 +140,7 @@ const Carousel = () => {
               </Typography>
             </CardBody>
             <CardFooter className="pt-0">
-              <Button color='amber' variant='gradient'>Book Now</Button>
+              <Button color='amber' variant='gradient' onClick={()=>{book(movie._id)}}>Book Now</Button>
             </CardFooter>
           </Card>
         ))}

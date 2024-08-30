@@ -8,6 +8,7 @@ import Signup from './components/Signup.jsx'
 import Login from './components/Login.jsx'
 // import Theatre from './components/Theatre.jsx'
 import UserDashboard from './components/UserDashboard.jsx';
+import Movie from './components/Movie.jsx'
 import { Routes, Route, useNavigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import Theatre from './components/Theatre.jsx'
@@ -39,13 +40,12 @@ function App() {
         <Route path='/theatre' element={<TheatreSeats />} />
         <Route path='/login' element={<Login setIsLoggedIn={setIsLoggedIn} />} />
         <Route path='/signup' element={<Signup />} />
-        {/* <Route path="/dashboard" element={<UserDashboard />}>
-          <Route path="theatre" element={<Theatre />}>
-            <Route path="theatre-seats" element={<TheatreSeats />} />
+        <Route path='/dashboard' element={<UserDashboard />} >
+          <Route path='movie' element={<Movie />} >
+          <Route path='theatre' element={<Theatre />} />
           </Route>
-        </Route> */}
-        <Route path='/dashboard' element={<UserDashboard />} />
-        <Route path='/dashboard/theatre' element={<Theatre />} />
+
+        </Route>
       </Routes>
       {/* <Theatre /> */}
     </>
