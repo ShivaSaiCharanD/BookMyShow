@@ -6,7 +6,7 @@ export default function Theatre() {
   console.log(localStorage.getItem('movie'))
   return (
     <div>
-      hello
+      <p style={{paddingTop:'50px'}}>Hello</p>
       <Outlet />
     </div>
   )
