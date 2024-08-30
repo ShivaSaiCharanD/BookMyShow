@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import axios from 'axios';
+import { Outlet } from 'react-router-dom';
 export default function Movie() {
     async function movieData() {
         const response = await axios.get(`http://localhost:4000/admin/getmoviebyid/${localStorage.getItem('movie')}`, 
@@ -19,7 +20,8 @@ export default function Movie() {
     , []);
   return (
     <div className='flex flex-col justify-center text-center'>
-       
+       <p>Hello</p>
+         <Outlet />
     </div>
   )
 }
