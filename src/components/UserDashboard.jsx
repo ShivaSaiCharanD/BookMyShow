@@ -6,10 +6,11 @@ function UserDashboard() {
   console.log('Current Path:', location.pathname); // Debug output
 
   const isMoviePage = location.pathname.includes('/dashboard/movie');
+  const isTheatrePage = location.pathname.includes('/dashboard/theatre');
 
   return (
     <div className="max-w-2xl">
-      {!isMoviePage && <Carousel />}
+      {!isMoviePage && !isTheatrePage && <Carousel />}
       <Outlet />
     </div>
   );
