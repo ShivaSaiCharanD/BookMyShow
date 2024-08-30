@@ -1,8 +1,9 @@
-import {useState} from 'react'
+import React from 'react'
 
 export default function Theatre() {
-    const [movie,setMovie] = useState(localStorage.getItem('movie'));
   return (
-    <div>{movie}</div>
+    <div>
+      
+    </div>
   )
 }
