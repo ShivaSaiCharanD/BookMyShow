@@ -11,8 +11,14 @@ function UserDashboard() {
 
   return (
     <div className="max-w-2xl">
-      {!isMoviePage && !isTheatrePage && <Carousel />}
-      <button onClick={()=>{navigate('/dashboard/movie/theatre')}}>next</button>
+      {!isMoviePage && !isTheatrePage && (
+            <>
+                <Carousel />
+                <button onClick={() => navigate('/dashboard/movie/theatre')}>
+                    Next
+                </button>
+            </>
+        )}
       <Outlet />
     </div>
   );
