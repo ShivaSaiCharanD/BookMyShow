@@ -4,9 +4,10 @@ import { Outlet } from "react-router-dom"
 
 export default function Theatre() {
   console.log(localStorage.getItem('movie'))
+  console.log("Hello")
   return (
     <div>
-      <p style={{paddingTop:'50px'}}>Hello</p>
+      <p>Hello</p>
       <Outlet />
     </div>
   )
